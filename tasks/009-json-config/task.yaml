@@ -1,0 +1,9 @@
+id: 009-json-config
+title: JSON service config has the wrong port
+prompt: |
+  The service configuration in /etc/termbench/service.json must set the HTTP port to 8080 and preserve the service name. Repair the configuration as valid JSON.
+max_steps: 10
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["\"port\": 8080", "jq"]
+notes: "The JSON is valid but points the service at the wrong port."

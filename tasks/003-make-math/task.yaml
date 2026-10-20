@@ -1,0 +1,9 @@
+id: 003-make-math
+title: Make build misses a math library
+prompt: |
+  Build the small C program in /work with make. The resulting ./distance command must run and print the expected distance. Keep the source program unchanged.
+max_steps: 12
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["-lm", "LDFLAGS"]
+notes: "The Makefile compiles a program using sqrt but does not link the math library."

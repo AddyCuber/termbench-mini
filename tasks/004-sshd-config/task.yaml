@@ -1,0 +1,9 @@
+id: 004-sshd-config
+title: SSH daemon configuration is invalid
+prompt: |
+  The SSH daemon on this machine must pass its configuration check and listen on port 2222. Repair the configuration without weakening authentication settings, then verify the daemon configuration.
+max_steps: 12
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["PermitRootLogin yes", "GSSAPIAuthentication maybe"]
+notes: "A drop-in contains an invalid boolean value, preventing sshd from accepting its configuration."

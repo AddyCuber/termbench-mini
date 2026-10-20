@@ -1,0 +1,9 @@
+id: 010-logrotate-config
+title: Log rotation targets the wrong file
+prompt: |
+  The application log rotation rule must target /var/log/termbench/app.log and keep seven rotated files. Correct the rule without changing its retention count.
+max_steps: 10
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["/var/log/syslog", "sed -i"]
+notes: "The rule preserves retention but rotates an unrelated system log."

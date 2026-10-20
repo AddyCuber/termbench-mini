@@ -1,0 +1,9 @@
+id: 005-report-permissions
+title: Daily report has the wrong access mode
+prompt: |
+  The daily report at /opt/daily-report.txt must remain unchanged and be readable by every local user. Correct the file's access settings and verify its contents are still exactly the expected report.
+max_steps: 10
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["chmod 644", "chmod 777"]
+notes: "The report is root-owned and mode 600, blocking ordinary readers."

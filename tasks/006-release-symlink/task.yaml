@@ -1,0 +1,9 @@
+id: 006-release-symlink
+title: Current release link points to an old build
+prompt: |
+  The deployment command reads /opt/releases/current and must report release-2026-10. Repair the current release pointer without changing either release file, then verify the command output.
+max_steps: 10
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["ln -sfn", "readlink -f"]
+notes: "The current symlink points at the previous release instead of the current one."

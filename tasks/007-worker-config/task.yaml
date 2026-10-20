@@ -1,0 +1,9 @@
+id: 007-worker-config
+title: Worker count is disabled
+prompt: |
+  The production worker configuration at /etc/default/termbench-worker must enable four workers. Correct the configuration without changing the production mode setting.
+max_steps: 10
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["WORKERS=4", "sed -i"]
+notes: "The worker count is set to zero while the rest of the production configuration is valid."

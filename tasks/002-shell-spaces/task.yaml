@@ -1,0 +1,9 @@
+id: 002-shell-spaces
+title: Archive helper breaks on filenames with spaces
+prompt: |
+  The archive helper must print one input path per line, preserving each complete path exactly, including paths containing spaces. Fix the helper and verify it handles the sample paths /tmp/alpha report.txt and /tmp/beta report.txt. Do not change the requested output format.
+max_steps: 12
+command_timeout_s: 30
+verify_timeout_s: 30
+forbidden_in_prompt: ["for path in", "$@"]
+notes: "The helper expands unquoted positional parameters, splitting filenames that contain spaces."

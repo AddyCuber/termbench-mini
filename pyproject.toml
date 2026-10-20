@@ -1,0 +1,20 @@
+[project]
+name = "termbench"
+version = "0.1.0"
+description = "Small benchmark of broken Linux machines for terminal-using AI agents"
+readme = "README.md"
+authors = [
+    { name = "Aditya Ray", email = "rayaditya03@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "openai",
+    "pyyaml",
+]
+
+[project.scripts]
+termbench = "termbench.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.16,<0.10.0"]
+build-backend = "uv_build"

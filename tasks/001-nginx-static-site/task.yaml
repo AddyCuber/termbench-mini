@@ -1,0 +1,9 @@
+id: 001-nginx-static-site
+title: Nginx static site is down
+prompt: |
+  The company website should be served by nginx on port 8080 on this machine, but it is down. Get http://localhost:8080/ and http://localhost:8080/about.html serving the pages in /srv/site. Do not change the content of the pages.
+max_steps: 15
+command_timeout_s: 60
+verify_timeout_s: 60
+forbidden_in_prompt: ["semicolon", "chmod", "permission"]
+notes: "Three bugs: missing semicolon after listen 8080, root points at /var/www/site instead of /srv/site, index.html is chmod 600 so www-data cannot read it. Nginx is not started."
