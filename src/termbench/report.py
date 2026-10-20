@@ -47,10 +47,10 @@ def write_report(results_path: Path, output_path: Path | None = None) -> Path:
     if failed_attempts:
         lines.extend(["", "## Failed attempts"])
         for item in failed_attempts:
-            output = item.get("test_output", "").strip() or "(no verifier output recorded)"
+            test_output = item.get("test_output", "").strip() or "(no verifier output recorded)"
             lines.append(
                 f"- `{item['task']}` / `{item['model']}` attempt {item['attempt']} "
-                f"({item.get('outcome', 'fail')}): `{output}`"
+                f"({item.get('outcome', 'fail')}): `{test_output}`"
             )
     output.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return output
