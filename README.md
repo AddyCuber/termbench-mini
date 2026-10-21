@@ -37,14 +37,48 @@ uv run termbench report runs/<run-id>/results.json
 
 The repository currently contains ten validated tasks covering nginx, shell quoting, Make linking, SSH configuration, permissions, release pointers, worker settings, backup restore, JSON configuration, and log rotation. Every task passes the seven validator checks for clean build, deterministic fail/pass behavior, image hygiene, prompt leak checks, and network isolation.
 
-## Results and limitations
+## Results
 
-Task validation is complete. A real Mistral Ministral 14B attempt solved task 001 on attempt 6 after the agent prompt was tightened; weaker models can miss the final service-start step. The first five-attempt calibration batch scored 3/5. The one-attempt model comparisons archived under `results/` are pre-truncation pilot data and should not be mixed with later runs. The 60 post-revision attempts included 4 token-cap outcomes; the earlier claim of zero budget outcomes was incorrect. Calibration is not yet complete across all ten tasks: the result files under `runs/` are exploratory and should not be treated as a statistically stable benchmark. Use the batch command to collect repeated attempts before comparing models.
+4 models x 10 tasks x 5 attempts, default sampling temperature (0.7), 30k token cap (40k and 25 steps for tasks 001, 002 and 008).
 
-Outcome definitions: `pass` means hidden tests passed, regardless of how the loop ended; `fail` means the loop ended normally or at `max_steps` and tests failed; `budget` means the token cap ended the loop and tests failed; `error` means an API failure, timeout, or crash.
+| Model | Passed (of 50) |
+|---|---:|
+| Ministral 3B | 17 |
+| Ministral 8B | 28 |
+| Ministral 14B | 37 |
+| Codestral | 25 |
 
-## Task revisions
+| Task | 3B | 8B | 14B | Codestral |
+|---|---:|---:|---:|---:|
+| 001 nginx static site | 2/5 | 0/5 | 3/5 | 0/5 |
+| 002 shell spaces | 0/5 | 4/5 | 3/5 | 0/5 |
+| 003 make math | 0/5 | 0/5 | 2/5 | 0/5 |
+| 004 sshd config | 0/5 | 0/5 | 3/5 | 5/5 |
+| 005 report permissions | 5/5 | 5/5 | 4/5 | 5/5 |
+| 006 release symlink | 3/5 | 5/5 | 5/5 | 5/5 |
+| 007 worker config | 0/5 | 1/5 | 3/5 | 5/5 |
+| 008 backup restore | 3/5 | 4/5 | 5/5 | 1/5 |
+| 009 JSON config | 3/5 | 5/5 | 5/5 | 4/5 |
+| 010 logrotate | 1/5 | 4/5 | 4/5 | 0/5 |
 
-Tasks 001, 002, and 008 were revised after the first calibration. Task 001 now allows 25 steps because its 15-step cap was binding while agents were still verifying nginx. Tasks 002 and 008 now name their helper paths and make the helper scripts executable, removing an environment-discovery confound while preserving the original bugs. All task verifiers now print an explicit `FAIL:` reason before exiting nonzero. Because prompt wording, executable bits, and step caps changed together, any score movement is an aggregate revision effect, not evidence for one specific cause. Results from before these revisions remain in `results/` and are labeled pre-revision data; they must not be mixed with post-revision measurements.
+Outcomes: `pass` = hidden tests passed, however the loop ended. `fail` = loop ended normally or at `max_steps` and tests failed. `budget` = token cap ended the loop and tests failed. `error` = API failure, timeout or crash.
+
+Excluded: 10 error outcomes from `mistral-large-2512` (not available on the account).
+
+## Findings
+
+- Same-family models scored 17, 28 and 37 of 50 at 3B, 8B and 14B. Individual cells are noisy at n=5.
+- Codestral has a different profile: 5/5 on 004 and 007, 0/5 on 001, 002 and 010. Its 001 failures all ended with nginx not running.
+- Agents often fix the symptom by hand and leave the real fix undone (003, and 008 before revision).
+- The validator caught three task bugs before any model ran: a compiler optimised away the intended linker error (003), sshd needed an unrelated missing directory (004), and a missing python3 in the image (009).
+- Tasks 002 and 008 were partly testing whether the agent could find an unnamed, non-executable helper. The path was named, the helper was made executable and the step cap was raised. Old results are kept as pre-revision.
+
+## Limits
+
+- n=5 per cell, 4 models from one provider, hand-written tasks.
+- Difficulty is measured on small open models, not frontier models.
+- Tasks 001, 002 and 008 were revised after seeing low scores, so some rebound is expected. The prompt, executable bit and step cap changed together, so no single cause can be named.
+- 4 of the 60 post-revision attempts (all 3B) ended on the token cap, so its post-revision numbers are slightly depressed.
+- Built with Cursor.
 
 See [docs/](docs/) for plain-language component notes and milestone questions.
