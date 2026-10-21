@@ -2,7 +2,7 @@ id: 001-nginx-static-site
 title: Nginx static site is down
 prompt: |
   The company website should be served by nginx on port 8080 on this machine, but it is down. Get http://localhost:8080/ and http://localhost:8080/about.html serving the pages in /srv/site. Do not change the content of the pages.
-max_steps: 15
+max_steps: 25
 command_timeout_s: 60
 verify_timeout_s: 60
 forbidden_in_prompt: ["semicolon", "chmod", "permission"]

@@ -41,4 +41,8 @@ The repository currently contains ten validated tasks covering nginx, shell quot
 
 Task validation is complete. A real Mistral Ministral 14B attempt solved task 001 on attempt 6 after the agent prompt was tightened; weaker models can miss the final service-start step. The first five-attempt calibration batch scored 3/5. The one-attempt model comparisons archived under `results/` are pre-truncation pilot data and should not be mixed with later runs. Calibration is not yet complete across all ten tasks: the result files under `runs/` are exploratory and should not be treated as a statistically stable benchmark. Use the batch command to collect repeated attempts before comparing models.
 
+## Task revisions
+
+Tasks 001, 002, and 008 were revised after the first calibration. Task 001 now allows 25 steps because its 15-step cap was binding while agents were still verifying nginx. Tasks 002 and 008 now name their helper paths and make the helper scripts executable, removing an environment-discovery confound while preserving the original bugs. All task verifiers now print an explicit `FAIL:` reason before exiting nonzero. Results from before these revisions remain in `results/` and are labeled pre-revision data; they must not be mixed with post-revision measurements.
+
 See [docs/](docs/) for plain-language component notes and milestone questions.

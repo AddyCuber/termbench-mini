@@ -1,8 +1,8 @@
 id: 008-backup-restore
 title: Restore helper extracts to the wrong directory
 prompt: |
-  The restore helper must place the backed-up configuration at /srv/restored/app.conf. Fix the helper and verify that the restored file contains the original setting.
-max_steps: 12
+  The restore helper /usr/local/bin/restore-app.sh must place the backed-up configuration at /srv/restored/app.conf. Fix the helper and verify that the restored file contains the original setting.
+max_steps: 25
 command_timeout_s: 30
 verify_timeout_s: 30
 forbidden_in_prompt: ["/tmp/wrong", "tar -xf"]
