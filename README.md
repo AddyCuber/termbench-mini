@@ -43,6 +43,6 @@ Task validation is complete. A real Mistral Ministral 14B attempt solved task 00
 
 ## Task revisions
 
-Tasks 001, 002, and 008 were revised after the first calibration. Task 001 now allows 25 steps because its 15-step cap was binding while agents were still verifying nginx. Tasks 002 and 008 now name their helper paths and make the helper scripts executable, removing an environment-discovery confound while preserving the original bugs. All task verifiers now print an explicit `FAIL:` reason before exiting nonzero. Results from before these revisions remain in `results/` and are labeled pre-revision data; they must not be mixed with post-revision measurements.
+Tasks 001, 002, and 008 were revised after the first calibration. Task 001 now allows 25 steps because its 15-step cap was binding while agents were still verifying nginx. Tasks 002 and 008 now name their helper paths and make the helper scripts executable, removing an environment-discovery confound while preserving the original bugs. All task verifiers now print an explicit `FAIL:` reason before exiting nonzero. Because prompt wording, executable bits, and step caps changed together, any score movement is an aggregate revision effect, not evidence for one specific cause. Results from before these revisions remain in `results/` and are labeled pre-revision data; they must not be mixed with post-revision measurements.
 
 See [docs/](docs/) for plain-language component notes and milestone questions.
