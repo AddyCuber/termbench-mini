@@ -39,7 +39,9 @@ The repository currently contains ten validated tasks covering nginx, shell quot
 
 ## Results and limitations
 
-Task validation is complete. A real Mistral Ministral 14B attempt solved task 001 on attempt 6 after the agent prompt was tightened; weaker models can miss the final service-start step. The first five-attempt calibration batch scored 3/5. The one-attempt model comparisons archived under `results/` are pre-truncation pilot data and should not be mixed with later runs. Calibration is not yet complete across all ten tasks: the result files under `runs/` are exploratory and should not be treated as a statistically stable benchmark. Use the batch command to collect repeated attempts before comparing models.
+Task validation is complete. A real Mistral Ministral 14B attempt solved task 001 on attempt 6 after the agent prompt was tightened; weaker models can miss the final service-start step. The first five-attempt calibration batch scored 3/5. The one-attempt model comparisons archived under `results/` are pre-truncation pilot data and should not be mixed with later runs. The 60 post-revision attempts included 4 token-cap outcomes; the earlier claim of zero budget outcomes was incorrect. Calibration is not yet complete across all ten tasks: the result files under `runs/` are exploratory and should not be treated as a statistically stable benchmark. Use the batch command to collect repeated attempts before comparing models.
+
+Outcome definitions: `pass` means hidden tests passed, regardless of how the loop ended; `fail` means the loop ended normally or at `max_steps` and tests failed; `budget` means the token cap ended the loop and tests failed; `error` means an API failure, timeout, or crash.
 
 ## Task revisions
 
